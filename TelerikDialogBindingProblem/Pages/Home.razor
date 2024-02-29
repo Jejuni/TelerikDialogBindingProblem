@@ -6,6 +6,7 @@
 
 <TelerikButton OnClick="@(() => _popupVisible = true)">Open Picker</TelerikButton>
 
+@* If you uncomment below and comment out the TelerikDialog data-binding works *@
 @* <PartPicker @bind-Selected="_model.Alternatives"/> *@
 
 <TelerikDialog @bind-Visible="_popupVisible">
