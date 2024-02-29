@@ -1,0 +1,19 @@
+﻿
+<TelerikGrid Data="@GridData"
+             SelectionMode="GridSelectionMode.Multiple"
+             @bind-SelectedItems:get="Selected"
+             @bind-SelectedItems:set="(IEnumerable<Part> x) => SelectedChanged.InvokeAsync(x.ToList())">
+    <GridColumns>
+        <GridCheckboxColumn CheckBoxOnlySelection="true"/>
+
+        <GridColumn Field="@nameof(Part.Name)" />
+        <GridColumn Field="@nameof(Part.Price)" />
+    </GridColumns>
+</TelerikGrid>
+
+@code {
+    [Parameter] public List<Part> Selected { get; set; } = [];
+    [Parameter] public EventCallback<List<Part>> SelectedChanged { get; set; }
+
+    private IEnumerable<Part> GridData => Part.All;
+}

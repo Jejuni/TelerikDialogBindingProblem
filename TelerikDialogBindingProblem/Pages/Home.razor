@@ -1,0 +1,41 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Problem Showcase</h1>
+
+<TelerikButton OnClick="@(() => _popupVisible = true)">Open Picker</TelerikButton>
+
+@* <PartPicker @bind-Selected="_model.Alternatives"/> *@
+
+<TelerikDialog @bind-Visible="_popupVisible">
+    <DialogContent>
+        <PartPicker @bind-Selected="_model.Alternatives"/>
+    </DialogContent>
+    <DialogButtons>
+        <TelerikButton OnClick="@(() => _popupVisible = false)">Ok</TelerikButton>
+    </DialogButtons>
+</TelerikDialog>
+
+<p class="k-mt-5">Alternatives:</p>
+
+<pre>
+    <code>
+Count: @_model.Alternatives.Count
+Items:
+    <ul>
+        @foreach (var alt in _model.Alternatives)
+        {
+            <li>Name: @alt.Name, Price: @alt.Price</li>
+        }
+    </ul>
+            
+
+    </code>
+</pre>
+
+@code {
+    private bool _popupVisible;
+    private readonly PartPlaceDefinition _model = PartPlaceDefinition.All[0];
+
+}
