@@ -12,7 +12,7 @@
 <TelerikDialog @ref="_dialogRef" @bind-Visible="_popupVisible">
     <DialogContent>
         @* Adding a refresh call after binding fixes the problem! *@
-        <PartPicker @bind-Selected="_model.Alternatives" @bind-Selected:after="() => _dialogRef.Refresh()"/>
+        <PartPicker @bind-Selected="_model.Alternatives" @bind-Selected:after="_dialogRef.Refresh"/>
     </DialogContent>
     <DialogButtons>
         <TelerikButton OnClick="@(() => _popupVisible = false)">Ok</TelerikButton>
