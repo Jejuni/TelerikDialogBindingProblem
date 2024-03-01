@@ -9,9 +9,10 @@
 @* If you uncomment below and comment out the TelerikDialog data-binding works *@
 @* <PartPicker @bind-Selected="_model.Alternatives"/> *@
 
-<TelerikDialog @bind-Visible="_popupVisible">
+<TelerikDialog @ref="_dialogRef" @bind-Visible="_popupVisible">
     <DialogContent>
-        <PartPicker @bind-Selected="_model.Alternatives"/>
+        @* Adding a refresh call after binding fixes the problem! *@
+        <PartPicker @bind-Selected="_model.Alternatives" @bind-Selected:after="() => _dialogRef.Refresh()"/>
     </DialogContent>
     <DialogButtons>
         <TelerikButton OnClick="@(() => _popupVisible = false)">Ok</TelerikButton>
@@ -38,5 +39,6 @@ Items:
 @code {
     private bool _popupVisible;
     private readonly PartPlaceDefinition _model = PartPlaceDefinition.All[0];
+    private TelerikDialog _dialogRef = null!;
 
 }
